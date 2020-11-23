@@ -16,7 +16,7 @@ manager.add_command('db', MigrateCommand)
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20))
-    password_hash = db.Column(db.Unicode(50))
+    password_hash = db.Column(db.Unicode(100))
     units = db.String(db.String(3))
     workouts = db.relationship('Workout', backref='user', lazy='dynamic')
 
@@ -55,4 +55,5 @@ class Set(db.Model):
 from views import *
 
 if __name__ == "__main__":
-    manager.run()
+    # manager.run()
+    app.run()
