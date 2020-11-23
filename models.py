@@ -52,5 +52,7 @@ class Set(db.Model):
     exercise_id = db.Column(db.Integer, db.ForeignKey('exercise.id'), primary_key=True)
 
 
+from views import *
+
 if __name__ == "__main__":
     manager.run()
