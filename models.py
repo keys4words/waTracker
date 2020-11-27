@@ -33,7 +33,7 @@ class Workout(db.Model):
 class Exercises(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
-
+    exercise = db.relationship('Exercise', backref='exercises', lazy='dynamic')
 
 class Exercise(db.Model):
     id = db.Column(db.Integer, primary_key=True)

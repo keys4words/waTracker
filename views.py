@@ -14,7 +14,11 @@ def before_request():
 @app.route('/')
 def index():
     if g.user:
-        return 'Currently logged in as: ' + g.user
+        # return 'Currently logged in as: ' + g.user
+        current_user = User.query.filter_by(name=g.user).first()
+        workouts = current_user.workouts.order_by(Workout.date.desc()).all()
+        return render_template('history.html', workouts=workouts)
+        
     return render_template('index.html')
 
 
@@ -25,7 +29,7 @@ def login():
         if bcrypt.checkpw(request.form['pass'].encode('utf-8'), user.password_hash):
             session['username'] = request.form['username']
             # print('You are logged in, ' + user.name)
-            return redirect(url_for('add_workout'))
+            return redirect(url_for('index'))
 
         return 'Password is incorrect!'
     return 'User does not exists!'
